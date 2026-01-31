@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master physics and mathematics with interactive practice problems, video lessons, and comprehensive tests. LearnSTEM - Your complete STEM learning platform.">
+    <meta name="keywords" content="physics learning, mathematics education, STEM, practice problems, online learning, science education">
+    <meta name="author" content="LearnSTEM">
+    <meta name="theme-color" content="#6366f1">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="LearnSTEM - Master Physics & Mathematics">
+    <meta property="og:description" content="Interactive learning platform for physics and mathematics with practice problems, video lessons, and tests.">
+    <meta property="og:image" content="/assets/icons/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    
+    <title>ETHUTE - Master Physics & Mathematics</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "ETHUTE",
+        "description": "Online learning platform for physics and mathematics",
+        "url": "https://learnstem.com",
+        "sameAs": []
+    }
+    </script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader-content">
+            <div class="loader-logo">ETHUTE</div>
+            <div class="loader-spinner"></div>
+            <p>Loading your learning experience...</p>
+        </div>
+    </div>
+
+    <!-- Authentication Section -->
+    <div id="authSection" class="auth-section hidden">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <div class="logo-icon">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="30" r="28" fill="url(#gradient1)"/>
+                        <path d="M30 15L35 25H25L30 15Z" fill="white"/>
+                        <circle cx="30" cy="35" r="8" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient1" x1="0" y1="0" x2="60" y2="60">
+                                <stop offset="0%" stop-color="#6366f1"/>
+                                <stop offset="100%" stop-color="#8b5cf6"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h1>ETHUTE</h1>
+                <p>Master Physics & Mathematics</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login" aria-label="Switch to login">
+                    <span>Login</span>
+                </button>
+                <button class="auth-tab" data-tab="signup" aria-label="Switch to sign up">
+                    <span>Sign Up</span>
+                </button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active" novalidate>
+                <div class="form-group">
+                    <label for="loginEmail" class="sr-only">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="loginEmail" 
+                        name="email"
+                        placeholder="Email" 
+                        required 
+                        autocomplete="email"
+                        aria-required="true">
+                    <span class="field-error" id="loginEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword" class="sr-only">Password</label>
+                    <div class="password-input-wrapper">
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            name="password"
+                            placeholder="Password" 
+                            required 
+                            autocomplete="current-password"
+                            aria-required="true">
+                        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="field-error" id="loginPasswordError"></span>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <button type="button" class="link-btn" id="forgotPasswordBtn">Forgot password?</button>
+                </div>
+                <button type="submit" class="btn-primary" id="loginBtn">
+                    <span>Login</span>
+                    <div class="btn-loader hidden"></div>
+                </button>
+                <p class="auth-error" id="loginError"></p>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form" novalidate>
+                <div class="form-group">
+                    <label for="signupName" class="sr-only">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="signupName" 
+                        name="name"
+                        placeholder="Full Name" 
+                        required 
+                        autocomplete="name"
+                        aria-required="true">
+                    <span class="field-error" id="signupNameError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail" class="sr-only">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="signupEmail" 
+                        name="email"
+                        placeholder="Email" 
+                        required 
+                        autocomplete="email"
+                        aria-required="true">
+                    <span class="field-error" id="signupEmailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword" class="sr-only">Password</label>
+                    <div class="password-input-wrapper">
+                        <input 
+                            type="password" 
+                            id="signupPassword" 
+                            name="password"
+                            placeholder="Password (min 6 characters)" 
+                            required 
+                            autocomplete="new-password"
+                            aria-required="true">
+                        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                            <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="password-strength" id="passwordStrength">
+                        <div class="strength-bar">
+                            <div class="strength-fill"></div>
+                        </div>
+                        <span class="strength-text"></span>
+                    </div>
+                    <span class="field-error" id="signupPasswordError"></span>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="terms" id="termsCheckbox" required>
+                        <span>I agree to the <a href="#" class="link-btn">Terms of Service</a> and <a href="#" class="link-btn">Privacy Policy</a></span>
+                    </label>
+                </div>
+                <button type="submit" class="btn-primary" id="signupBtn">
+                    <span>Create Account</span>
+                    <div class="btn-loader hidden"></div>
+                </button>
+                <p class="auth-error" id="signupError"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App Section -->
+    <div id="appSection" class="app-section hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <svg width="32" height="32" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="30" cy="30" r="28" fill="url(#gradient2)"/>
+                            <path d="M30 15L35 25H25L30 15Z" fill="white"/>
+                            <circle cx="30" cy="35" r="8" fill="white"/>
+                            <defs>
+                                <linearGradient id="gradient2" x1="0" y1="0" x2="60" y2="60">
+                                    <stop offset="0%" stop-color="#6366f1"/>
+                                    <stop offset="100%" stop-color="#8b5cf6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>ETHUTE</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="user-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Progress</span>
+                            <span class="stat-value" id="userProgress">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Streak</span>
+                            <span class="stat-value" id="userStreak">0🔥</span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span class="notification-badge hidden">3</span>
+                        </button>
+                        <div class="user-menu">
+                            <button class="user-menu-btn" id="userMenuBtn" aria-haspopup="true" aria-expanded="false">
+                                <div class="user-avatar" id="userAvatar">A</div>
+                                <span class="user-name" id="userName">User</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="user-dropdown hidden" id="userDropdown">
+                                <a href="#" class="dropdown-item">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <span>My Profile</span>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                        <path d="M12 1v6m0 6v6"></path>
+                                    </svg>
+                                    <span>Settings</span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <button class="dropdown-item" id="logoutBtn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                                    </svg>
+                                    <span>Logout</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs" role="navigation" aria-label="Main navigation">
+            <button class="nav-tab active" data-section="practice" role="tab" aria-selected="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+                <span>Practice</span>
+            </button>
+            <button class="nav-tab" data-section="lessons" role="tab" aria-selected="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                </svg>
+                <span>Video Lessons</span>
+            </button>
+            <button class="nav-tab" data-section="tests" role="tab" aria-selected="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span>Tests</span>
+            </button>
+            <button class="nav-tab" data-section="exams" role="tab" aria-selected="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <polyline points="9 11 12 14 22 4"></polyline>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                <span>Exams</span>
+            </button>
+            <button class="nav-tab" data-section="progress" role="tab" aria-selected="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span>Progress</span>
+            </button>
+        </nav>
+
+        <!-- Ad Space Top -->
+        <div class="ad-space ad-top" role="complementary" aria-label="Advertisement">
+            <!-- Replace with actual ad code -->
+            <div class="ad-placeholder">
+                <p>Advertisement Space - 728x90</p>
+                <small>Google AdSense or other ad network</small>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Practice Section -->
+            <section id="practiceSection" class="content-section active" role="tabpanel">
+                <div class="section-header">
+                    <h2>Practice Problems</h2>
+                    <div class="section-actions">
+                        <button class="btn-secondary" id="filterBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                            </svg>
+                            <span>Filter</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chapter-selector">
+                    <label for="chapterSelect">Select Chapter:</label>
+                    <select id="chapterSelect" aria-label="Select chapter">
+                        <option value="kinematics">Chapter 1: Kinematics</option>
+                        <option value="forces">Chapter 2: Forces & Motion</option>
+                        <option value="energy">Chapter 3: Energy & Work</option>
+                        <option value="algebra">Chapter 4: Algebra Basics</option>
+                        <option value="calculus">Chapter 5: Calculus Introduction</option>
+                        <option value="trigonometry">Chapter 6: Trigonometry</option>
+                    </select>
+                </div>
+
+                <div class="problems-grid" id="problemsGrid" role="list">
+                    <!-- Problems will be loaded here dynamically -->
+                </div>
+
+                <div class="empty-state hidden" id="problemsEmpty">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                    <h3>No problems available</h3>
+                    <p>Check back later for new practice problems</p>
+                </div>
+            </section>
+
+            <!-- Video Lessons Section -->
+            <section id="lessonsSection" class="content-section" role="tabpanel">
+                <div class="section-header">
+                    <h2>Video Lessons</h2>
+                    <div class="section-actions">
+                        <div class="search-box">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <input type="search" placeholder="Search lessons..." id="lessonSearch">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-selector">
+                    <label for="lessonChapterSelect">Select Chapter:</label>
+                    <select id="lessonChapterSelect" aria-label="Select chapter for lessons">
+                        <option value="kinematics">Chapter 1: Kinematics</option>
+                        <option value="forces">Chapter 2: Forces & Motion</option>
+                        <option value="energy">Chapter 3: Energy & Work</option>
+                        <option value="algebra">Chapter 4: Algebra Basics</option>
+                        <option value="calculus">Chapter 5: Calculus Introduction</option>
+                        <option value="trigonometry">Chapter 6: Trigonometry</option>
+                    </select>
+                </div>
+
+                <div class="video-list" id="videoList" role="list">
+                    <!-- Videos will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Tests Section -->
+            <section id="testsSection" class="content-section" role="tabpanel">
+                <div class="section-header">
+                    <h2>Chapter Tests</h2>
+                    <p class="section-subtitle">Assess your understanding with chapter-specific tests</p>
+                </div>
+
+                <div class="tests-grid" id="testsGrid" role="list">
+                    <!-- Tests will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Exams Section -->
+            <section id="examsSection" class="content-section" role="tabpanel">
+                <div class="section-header">
+                    <h2>Final Exams</h2>
+                    <p class="section-subtitle">Comprehensive exams covering multiple chapters</p>
+                </div>
+
+                <div class="exams-grid" id="examsGrid" role="list">
+                    <!-- Exams will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section id="progressSection" class="content-section" role="tabpanel">
+                <div class="section-header">
+                    <h2>Your Progress</h2>
+                    <p class="section-subtitle">Track your learning journey</p>
+                </div>
+
+                <div class="progress-dashboard">
+                    <div class="dashboard-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon blue">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="totalProblems">0</span>
+                                <span class="stat-label">Problems Solved</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon green">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="testsCompleted">0</span>
+                                <span class="stat-label">Tests Completed</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon purple">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="hoursStudied">0h</span>
+                                <span class="stat-label">Hours Studied</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon orange">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="averageScore">0%</span>
+                                <span class="stat-label">Average Score</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Weekly Activity</h3>
+                        <canvas id="activityChart" width="400" height="200"></canvas>
+                    </div>
+
+                    <div class="achievement-section">
+                        <h3>Recent Achievements</h3>
+                        <div class="achievements-grid" id="achievementsList">
+                            <!-- Achievements will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Ad Space Bottom -->
+        <div class="ad-space ad-bottom" role="complementary" aria-label="Advertisement">
+            <div class="ad-placeholder">
+                <p>Advertisement Space - 728x90</p>
+                <small>Google AdSense or other ad network</small>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ETHUTE</h4>
+                    <p>Making ETHUTE's education accessible to everyone</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LearnSTEM. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Problem Modal -->
+    <div id="problemModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="close-btn" aria-label="Close modal">&times;</button>
+            <h3 id="modalTitle"></h3>
+            
+            <div class="problem-display">
+                <div class="problem-question">
+                    <h4>Question:</h4>
+                    <div class="image-container">
+                        <img id="questionImage" src="" alt="Problem question" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="answer-section">
+                    <div class="input-group">
+                        <label for="userAnswer">Your Answer:</label>
+                        <input type="text" id="userAnswer" placeholder="Enter your answer" aria-label="Your answer">
+                        <div class="input-hint">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                            <span>Press Enter or click Check Answer</span>
+                        </div>
+                    </div>
+
+                    <div class="answer-reveal">
+                        <div class="image-container">
+                            <img id="answerImage" class="blurred" src="" alt="Solution" loading="lazy">
+                            <div class="blur-overlay">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <p>Answer is hidden</p>
+                            </div>
+                        </div>
+                        <button id="checkAnswerBtn" class="btn-primary">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Check Answer</span>
+                        </button>
+                    </div>
+
+                    <div class="solution-feedback hidden" id="solutionFeedback">
+                        <div class="feedback-content">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <p>Great job! You can now view the solution.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ad Space in Modal -->
+            <div class="ad-space ad-modal" role="complementary" aria-label="Advertisement">
+                <div class="ad-placeholder">
+                    <p>Advertisement Space - 300x250</p>
+                    <small>Google AdSense or other ad network</small>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-secondary" id="prevProblemBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    <span>Previous</span>
+                </button>
+                <button class="btn-secondary" id="nextProblemBtn">
+                    <span>Next</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+    
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
